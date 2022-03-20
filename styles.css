@@ -1,0 +1,107 @@
+body{
+    background: #1C362E;
+}
+
+h1{
+    text-align: center;
+    color: white;
+    font-family: Quantico;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    margin-top: 5%;
+}
+
+@media screen and (max-width: 1300px) {
+    h1 {
+      font-size: 30px;
+    }
+}
+
+.calc-body{
+    position: absolute;
+    min-width: 500px;
+    min-height: 450px;
+    width: 43%;
+    height: 75%;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 28%;
+    margin-right: 30%;
+    z-index: -1;
+
+    background: #264A3F;
+    box-shadow: -5px 5px 10px 5px rgba(14, 24, 21, 0.25);
+    box-shadow: 5px -5px 10px 5px rgba(14, 24, 21, 0.25);
+    border-radius: 40px;
+    padding: 1%;
+}
+
+.convertFrom{
+    position: absolute;
+    z-index: -1;
+    height: 25px;
+    width: 48%;
+    margin-top: 12%;
+    margin-left: 22.5%;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 10px;
+    border-color: rgba(255, 255, 255, 0.82);
+    text-align: center;
+}
+
+.convertTo{
+    position: absolute;
+    z-index: -1;
+    height: 25px;
+    width: 48%;
+    margin-top: 50%;
+    margin-left: 22.5%;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 10px;
+    border-color: rgba(255, 255, 255, 0.82);
+    text-align: center;
+    cursor: pointer;
+}
+
+.triangle {
+	position: relative;
+	background-color: #495CBE;
+    margin-left: 48.5%;
+    margin-top: 40%;
+    z-index: -1;
+}
+.triangle:before,
+.triangle:after {
+	content: '';
+	position: absolute;
+	background-color: inherit;
+}
+.triangle,
+.triangle:before,
+.triangle:after {
+	width:  2.5em;
+	height: 2.5em;
+	border-top-right-radius: 30%;
+}
+
+.triangle {
+	transform: rotate(0deg) skewX(-30deg) scale(1,.866);
+}
+.triangle:before {
+	transform: rotate(-135deg) skewX(-45deg) scale(1.414,.707) translate(0,-50%);
+}
+.triangle:after {
+	transform: rotate(135deg) skewY(-45deg) scale(.707,1.414) translate(50%);
+}
+
+
+@media screen and (max-width: 1500px) {
+    .triangle,
+    .triangle:before,
+    .triangle:after {
+        width:  2em;
+        height: 2em;
+    }
+}

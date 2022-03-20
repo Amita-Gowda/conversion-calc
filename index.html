@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!--Imports-->
+        <link href="styles.css" rel="stylesheet">
+        <script src="calculate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Quantico' rel='stylesheet'>
+        
+        <script> 
+            $(function () {
+                var includes = $('[data-include]')
+                $.each(includes, function () {
+                    var file = 'DropDown/' + $(this).data('include') + '.html'
+                    $(this).load(file)
+                })
+            })
+        </script> 
+
+    </head>
+
+    <body>
+        
+        <div class="calc-body">
+            
+            <!--Title-->
+            <h1>Computer Conversion Calculator</h1> <br\>
+
+            <!--Dropdowns-->
+            <div data-include="convertFrom"></div>
+            <div data-include="convertTo"></div>
+
+            <input class="convertFrom" type="text" name="convertFromInput" id="convertFromVal">
+            <input class="convertTo" type="text" name="convertToVal" id="convertToVal" onclick="copyToClipboard()" readonly>
+            <div class="triangle" onclick="buttonClicked()"></div>   
+
+        </div>
+
+    </body>
+</html>

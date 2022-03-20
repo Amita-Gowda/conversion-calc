@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .d1-display-value {
+                margin-top: 5%;
+                margin-left: 36%;
+                min-height: 29px;
+                min-width: 130px;
+                width: 22.5%;
+                display: flex;
+                position: absolute;
+                background: #366F5D;
+                border-radius: 15px;
+                cursor: pointer;
+            }
+
+            .d1-value-text {
+                display: flex;
+                padding-left: 10px;
+                font-family: sans-serif;
+                align-items: center;
+                color: black;
+            }
+
+            .d1-arrow {
+                margin-left: 82%;
+                top: 14px;
+                position: absolute;
+            }
+
+            .d1-arrow.d1-arrow-down {
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-top: 6px solid black;
+            }
+
+            .d1-select-container {
+                margin-top: 5%;
+                margin-left: 36%;
+                min-height: 29px;
+                min-width: 150px;
+                width: 22.5%;
+                padding: 0px;
+                position: absolute;
+                visibility: hidden;
+                height: fit-content;
+                border: 2px solid #316454;
+                background-color: #3D7A67;
+                list-style-type: none;
+                display: block;
+                border-radius: 15px;
+            }
+
+            .d1-select-container:focus {
+                outline:none;
+            }
+
+            .d1-select-option {
+                display: none;
+                height: 29px;
+                display: flex;
+                padding-left: 10px;
+                font-family: sans-serif;
+                align-items: center;
+                color: black;
+            }
+
+            .d1-select-option:hover {
+                background-color: #49937C;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        </style>
+
+        <script>
+            var isOpen = false;
+
+            function d1_openOptions(e) {
+
+                isOpen = !isOpen;
+
+                if (isOpen) {
+                    document.getElementById('selectContainer1').style.visibility = 'visible';
+                    document.getElementById('selectContainer1').focus();
+                } else {
+                    document.getElementById('selectContainer1').blur();
+                    document.getElementById('selectContainer1').style.visibility = 'hidden';
+                }
+
+            }
+
+            function d1_selected(val) {
+                document.getElementById('valueText1').innerHTML = val;
+                document.getElementById('selectedValue1').value = val;
+                d1_openOptions();
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <div class="dropdown-container">
+            <input name="d1-select_value" type="hidden" id="selectedValue1">
+            <div class="d1-display-value" id="displayValue1" onclick="d1_openOptions(event)">
+               <span class="d1-value-text" id="valueText1">Select</span>
+               <span class="d1-arrow d1-arrow-down" id="arrow1"></span>
+            </div>
+            <ul tabindex="0" class="d1-select-container" id="selectContainer1" onblur="d1_openOptions(event)">
+               <li class="d1-select-option" onclick="d1_selected('Binary')">Binary</li>
+               <li class="d1-select-option" onclick="d1_selected('Hexadecimal')">Hexadecimal</li>
+               <li class="d1-select-option" onclick="d1_selected('Octal')">Octal</li>
+               <li class="d1-select-option" onclick="d1_selected('Decimal')">Decimal</li>
+            </ul>
+        </div>
+
+    </body>
+</html>

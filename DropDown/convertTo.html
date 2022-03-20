@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .display-value {
+                margin-top: 25%;
+                margin-left: 36%;
+                min-height: 29px;
+                min-width: 130px;
+                width: 22.5%;
+                display: flex;
+                position: absolute;
+                background: #366F5D;
+                border-radius: 15px;
+                cursor: pointer;
+            }
+
+            .value-text {
+                display: flex;
+                padding-left: 10px;
+                font-family: sans-serif;
+                align-items: center;
+                color: black;
+            }
+
+            .arrow {
+                margin-left: 82%;
+                top: 14px;
+                position: absolute;
+            }
+
+            .arrow.arrow-down {
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-top: 6px solid black;
+            }
+
+            .select-container {
+                margin-top: 25%;
+                margin-left: 36%;
+                min-height: 29px;
+                min-width: 150px;
+                width: 22.5%;
+                padding: 0px;
+                position: absolute;
+                visibility: hidden;
+                height: fit-content;
+                border: 2px solid #316454;
+                background-color: #3D7A67;
+                list-style-type: none;
+                display: block;
+                border-radius: 15px;
+            }
+
+            .select-container:focus {
+                outline:none;
+            }
+
+            .select-option {
+                display: none;
+                height: 29px;
+                display: flex;
+                padding-left: 10px;
+                font-family: sans-serif;
+                align-items: center;
+                color: black;
+            }
+
+            .select-option:hover {
+                background-color: #49937C;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        </style>
+
+        <script>
+            var isOpen = false;
+            
+            function openOptions(e) {
+
+                isOpen = !isOpen;
+                
+                if (isOpen) {
+                    document.getElementById('selectContainer').style.visibility = 'visible';
+                    document.getElementById('selectContainer').focus();
+                } else {
+                    document.getElementById('selectContainer').blur();
+                    document.getElementById('selectContainer').style.visibility = 'hidden';
+                }
+
+            }
+
+            function selected(val) {
+                document.getElementById('valueText').innerHTML = val;
+                document.getElementById('selectedValue').value = val;
+                openOptions();
+            }
+            
+        </script>
+    </head>
+
+    <body>
+
+        <div class="dropdown-container">
+            <input name="select_value" type="hidden" id="selectedValue">
+            <div class="display-value" id="displayValue" onclick="openOptions(event)">
+               <span class="value-text" id="valueText">Select</span>
+               <span class="arrow arrow-down" id="arrow"></span>
+            </div>
+            <ul tabindex="0" class="select-container" id="selectContainer" onblur="openOptions(event)">
+               <li class="select-option" onclick="selected('Binary')">Binary</li>
+               <li class="select-option" onclick="selected('Hexadecimal')">Hexadecimal</li>
+               <li class="select-option" onclick="selected('Octal')">Octal</li>
+               <li class="select-option" onclick="selected('Decimal')">Decimal</li>
+            </ul>
+         </div>
+
+    </body>
+</html>
