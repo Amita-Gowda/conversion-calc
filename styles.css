@@ -40,7 +40,7 @@ h1{
 
 .convertFrom{
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     height: 25px;
     width: 48%;
     margin-top: 12%;
@@ -66,51 +66,20 @@ h1{
 }
 
 .triangle {
-	position: relative;
 	background-color: #495CBE;
-    margin-left: 48.5%;
-    margin-top: 40%;
-    z-index: -1;
-}
-.triangle:before,
-.triangle:after {
-	content: '';
-	position: absolute;
-	background-color: inherit;
-}
-.triangle,
-.triangle:before,
-.triangle:after {
-	width:  2.5em;
-	height: 2.5em;
-	border-top-right-radius: 30%;
+    margin-left: 44%;
+    margin-top: 37%;
+    width: 8.5em;
+    height: 8.5em;
+    z-index: -2;
+    cursor: pointer;
 }
 
-.triangle {
-	transform: rotate(0deg) skewX(-30deg) scale(1,.866);
-}
-.triangle:before {
-	transform: rotate(-135deg) skewX(-45deg) scale(1.414,.707) translate(0,-50%);
-}
-.triangle:after {
-	transform: rotate(135deg) skewY(-45deg) scale(.707,1.414) translate(50%);
-}
 
-.triangle:hover { 
-    cursor: pointer;
-}
-.triangle:hover:before { 
-    cursor: pointer;
- }
-.triangle:hover:after { 
-    cursor: pointer;
-}
 
 @media screen and (max-width: 1500px) {
-    .triangle,
-    .triangle:before,
-    .triangle:after {
-        width:  2em;
-        height: 2em;
+    .triangle{
+        width: 4em;
+        height: 4em;
     }
 }

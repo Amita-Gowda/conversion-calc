@@ -1,3 +1,4 @@
+
 function buttonClicked(){
 
     var convertFromType = document.getElementById("selectedValue1").value;
@@ -55,7 +56,7 @@ function buttonClicked(){
         document.getElementById("convertFromVal").value = "";
         
     } else if(convertFromType == "Hexadecimal" && convertToType == "Binary"){
-
+        
         document.getElementById("convertToVal").value = decimalToBinary(hexadecimalToDecimal(input));
         document.getElementById("convertFromVal").value = "";
         
@@ -118,13 +119,14 @@ function isBinary(input){
 
 function isHexa(input){
 
-    var regex = /[0-9A-Fa-f]{6}/g;
+    var regex = /[0-9A-Fa-f]/g;
 
     if(regex.test(input)){
         return true;
     } else{
         return false;
     }
+
 }
 
 function binaryToDecimal(itemToConvert){
@@ -298,6 +300,8 @@ function binaryToHexadecimal(itemToConvert){
 
 function hexadecimalToDecimal(itemToConvert){
 
+    itemToConvert = itemToConvert.toUpperCase();
+
     if(!isHexa(itemToConvert)){
 
         alert("Input is not a valid hexadecimal value!");
@@ -369,14 +373,14 @@ function octalToDecimal(itemToConvert){
 
 function decimalToBinary(itemToConvert){
 
+    itemToConvert = itemToConvert.replaceAll(',', '');
+
     if(isNaN(itemToConvert)){
 
         alert("Input is not a valid Decimal Number!");
         return "";
 
     } else {
-
-        itemToConvert = itemToConvert.replaceAll(',', '');
 
         var temp = itemToConvert;
         var binaryList = [];
