@@ -1,11 +1,17 @@
-
+/*When the enter button is clicked this function will call the appropriate
+ calculation functions depending on the options in both dropdowns*/
 function buttonClicked(){
 
+    //Gets both options in the dropdowns
     var convertFromType = document.getElementById("selectedValue1").value;
     var convertToType = document.getElementById("selectedValue").value;
 
+    //Gets the user input
     var input = (document.getElementById("convertFromVal").value).split(" ").join("");
 
+    /*First checks if the options in the drop down are the same. If they are
+    it will throw an alert showing that there is nothing to convert. Otherwise,
+    for the appropriate combination, the right calculation functionw ill be called*/
     if(convertFromType == convertToType){
 
         alert("There's nothing to convert!");
@@ -13,68 +19,57 @@ function buttonClicked(){
     } else if(convertFromType == "Binary" && convertToType == "Hexadecimal"){
 
         document.getElementById("convertToVal").value = binaryToHexadecimal(input);
-        document.getElementById("convertFromVal").value = "";
 
     } else if(convertFromType == "Binary" && convertToType == "Octal"){
 
         document.getElementById("convertToVal").value = binaryToOctal(input);
-        document.getElementById("convertFromVal").value = "";
 
     } else if(convertFromType == "Binary" && convertToType == "Decimal"){
 
         document.getElementById("convertToVal").value = binaryToDecimal(input);
-        document.getElementById("convertFromVal").value = "";
 
     } else if(convertFromType == "Hexadecimal" && convertToType == "Decimal"){
 
         document.getElementById("convertToVal").value = hexadecimalToDecimal(input);
-        document.getElementById("convertFromVal").value = "";
 
     } else if(convertFromType == "Octal" && convertToType == "Decimal"){
 
         document.getElementById("convertToVal").value = octalToDecimal(input);
-        document.getElementById("convertFromVal").value = "";
 
     } else if(convertFromType == "Decimal" && convertToType == "Binary"){
 
         document.getElementById("convertToVal").value = decimalToBinary(input);
-        document.getElementById("convertFromVal").value = "";
 
     } else if(convertFromType == "Decimal" && convertToType == "Hexadecimal"){
 
+        //Converts the decimal value to binary then the binary to hexadecimal
         document.getElementById("convertToVal").value = binaryToHexadecimal(decimalToBinary(input));
-        document.getElementById("convertFromVal").value = "";
         
     } else if(convertFromType == "Decimal" && convertToType == "Octal"){
 
+        //Converts the decimal value to binary then the binary to octal
         document.getElementById("convertToVal").value = binaryToOctal(decimalToBinary(input));
-        document.getElementById("convertFromVal").value = "";
         
     } else if(convertFromType == "Hexadecimal" && convertToType == "Binary"){
 
+        //Converts the hexadecimal to decimal then decimal to binary
         document.getElementById("convertToVal").value = decimalToBinary(hexadecimalToDecimal(input));
-        document.getElementById("convertFromVal").value = "";
-        
-    } else if(convertFromType == "Hexadecimal" && convertToType == "Binary"){
-        
-        document.getElementById("convertToVal").value = decimalToBinary(hexadecimalToDecimal(input));
-        document.getElementById("convertFromVal").value = "";
-        
+
     } else if(convertFromType == "Octal" && convertToType == "Binary"){
 
+        //Converts the octal to decimal then decimal to binary
         document.getElementById("convertToVal").value = decimalToBinary(octalToDecimal(input));
-        document.getElementById("convertFromVal").value = "";
-        
+
     } else if(convertFromType == "Octal" && convertToType == "Hexadecimal"){
 
+        //Converts octal to decimal, decimal to binary, then binary to hexadecimal
         document.getElementById("convertToVal").value = binaryToHexadecimal(decimalToBinary(octalToDecimal(input)));
-        document.getElementById("convertFromVal").value = "";
-        
+
     } else if(convertFromType == "Hexadecimal" && convertToType == "Octal"){
 
+        //Converts hexadecimal to decimal, decimal to binary, then binary to octal
         document.getElementById("convertToVal").value = binaryToOctal(decimalToBinary(hexadecimalToDecimal(input)));
-        document.getElementById("convertFromVal").value = "";
-        
+
     }
     
 }
@@ -86,7 +81,9 @@ function copyToClipboard(){
     if(document.getElementById("convertToVal").value.length == 0){
         //displays an alert if there's no value
         alert("There is no text to copy!");
+
     } else{
+
         var copyText = document.getElementById("convertToVal");
 
         copyText.select();
@@ -95,14 +92,17 @@ function copyToClipboard(){
         navigator.clipboard.writeText(copyText.value);
       
         alert("Copied the text: " + copyText.value);
+
     }
 
 }
 
+/*Checks if string input is binary*/
 function isBinary(input){
 
     var binary = false;
 
+    //Checks each digit to see if it's either 0 or 1, otherwise returns false
     for (var i = 0; i < input.length; i++) {
 
         if (input[i] == "0" || input[i] == "1") {
@@ -117,20 +117,49 @@ function isBinary(input){
     
 }
 
+/*Checks if strring input is hexadecimal*/
 function isHexa(input){
 
-    var regex = /[0-9A-Fa-f]/g;
+    var hexa = false;
 
-    if(regex.test(input)){
-        return true;
-    } else{
-        return false;
+    //Checks each digit to see if it's less than or equal to 9 or letters A-F, otherwise returns false
+    for (var i = 0; i < input.length; i++) {
+
+        if (input[i] <= "9" || (input[i] == "A" || input[i] == "B" || input[i] == "C" || input[i] == "D" || input[i] == "E" || input[i] == "F")) {
+            hexa = true;
+        } else {   
+            hexa = false;
+        }
+
     }
+
+    return hexa;
 
 }
 
+function isOctal(input){
+
+    var octal = false;
+
+    //Checks each digit to see if it's less than or equal to 7, otherwise returns false
+    for (var i = 0; i < input.length; i++) {
+
+        if (input[i] <= "7") {
+            octal = true;
+        } else {
+            octal = false;
+        }
+
+    }
+
+    return octal;
+
+}
+
+/*Converts Binary to Decimal*/
 function binaryToDecimal(itemToConvert){
 
+    //Checks if input is a proper binary sequence
     if(!isBinary(itemToConvert)){
 
         alert("Input is not valid binary!");
@@ -140,20 +169,24 @@ function binaryToDecimal(itemToConvert){
 
         var decValSum = 0;
 
+        //Checks if there is a digit that is 1 then does 2^(last index - i)
         for(var i = itemToConvert.length-1; i > -1; i--){
             if(itemToConvert[i] == "1"){
-                decValSum = decValSum + (Math.pow(2, ((itemToConvert.length-1)-i)));
+                decValSum = decValSum + (Math.pow(2, ((itemToConvert.length-1)- i)));
             }
         }
 
+        //returns the number split with commas
         return decValSum.toLocaleString('en-US');
 
     }
 
 }
 
+/*Converts Binary to Octal*/
 function binaryToOctal(itemToConvert){
 
+    //Checks if input is a proper binary sequence
     if(!isBinary(itemToConvert)){
 
         alert("Input is not valid binary!");
@@ -212,6 +245,7 @@ function binaryToOctal(itemToConvert){
     
 }
 
+/*Converts Binary to Hexadecimal*/
 function binaryToHexadecimal(itemToConvert){
 
     if(!isBinary(itemToConvert)){
@@ -347,7 +381,7 @@ function hexadecimalToDecimal(itemToConvert){
 
 function octalToDecimal(itemToConvert){
 
-    if(isNaN(itemToConvert)){
+    if(!isOctal(itemToConvert)){
 
         alert("Input is not a valid Octal Number!");
         return "";
