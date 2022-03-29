@@ -102,9 +102,9 @@ function isBinary(input){
 
     var binary = false;
 
-    //Checks each digit to see if it's either 0 or 1, otherwise returns false
     for (var i = 0; i < input.length; i++) {
 
+        //Checks if the charac 0 or 1
         if (input[i] == "0" || input[i] == "1") {
             binary = true;
         } else {
@@ -117,7 +117,7 @@ function isBinary(input){
     
 }
 
-/*Checks if strring input is hexadecimal*/
+/*Checks if string input is hexadecimal*/
 function isHexa(input){
 
     var hexa = false;
@@ -137,6 +137,7 @@ function isHexa(input){
 
 }
 
+/*Checks if string input is octal*/
 function isOctal(input){
 
     var octal = false;
@@ -159,7 +160,7 @@ function isOctal(input){
 /*Converts Binary to Decimal*/
 function binaryToDecimal(itemToConvert){
 
-    //Checks if input is a proper binary sequence
+    //Checks if input is not a proper binary sequence
     if(!isBinary(itemToConvert)){
 
         alert("Input is not valid binary!");
@@ -172,7 +173,7 @@ function binaryToDecimal(itemToConvert){
         //Checks if there is a digit that is 1 then does 2^(last index - i)
         for(var i = itemToConvert.length-1; i > -1; i--){
             if(itemToConvert[i] == "1"){
-                decValSum = decValSum + (Math.pow(2, ((itemToConvert.length-1)- i)));
+                decValSum = decValSum + (Math.pow(2, ((itemToConvert.length-1) - i)));
             }
         }
 
@@ -186,7 +187,7 @@ function binaryToDecimal(itemToConvert){
 /*Converts Binary to Octal*/
 function binaryToOctal(itemToConvert){
 
-    //Checks if input is a proper binary sequence
+    //Checks if input is not a proper binary sequence
     if(!isBinary(itemToConvert)){
 
         alert("Input is not valid binary!");
@@ -194,6 +195,7 @@ function binaryToOctal(itemToConvert){
 
     } else {
 
+        //Reverses input string
         itemToConvert = itemToConvert.split("");
         itemToConvert = itemToConvert.reverse();
         itemToConvert = itemToConvert.join("");
@@ -202,6 +204,7 @@ function binaryToOctal(itemToConvert){
         var octalValSum = 0;
         var splitList = [];
 
+        //If there is less than 3 characters in the binary string, append everything into splitList
         if(itemToConvert.length <= 2){
             splitList.unshift(itemToConvert);
         }
@@ -210,22 +213,25 @@ function binaryToOctal(itemToConvert){
             //Loops until itemToConvert has no more values left
             while(itemToConvert.length > 0){
                 
+                //If the input is less than 3 characters then append all that's left into split list
                 if(itemToConvert.length < 3){
                     splitList.unshift(itemToConvert.split("").reverse().join(""));
                     itemToConvert = "";
                 }else{
+                    //cuts the first 3 characters of the input
                     splitList.unshift((itemToConvert.substr(0, 3)).split("").reverse().join(""));
                     itemToConvert = itemToConvert.substr(3, itemToConvert.length);
                 }
             }
             
+            //if the input has 3 characters remaining then push the remaining into splitList
             if(itemToConvert.length <= 3 && itemToConvert.length != 0){
                 splitList.push(itemToConvert.split("").reverse().join(""));
             }
 
         }
 
-
+        //For each binary element in splitListt
         for(var i = 0; i < splitList.length; i++){
             octalValSum = 0;
 
@@ -248,6 +254,7 @@ function binaryToOctal(itemToConvert){
 /*Converts Binary to Hexadecimal*/
 function binaryToHexadecimal(itemToConvert){
 
+    //Checks if input is not a proper binary sequence
     if(!isBinary(itemToConvert)){
 
         alert("Input is not valid binary!");
@@ -332,10 +339,13 @@ function binaryToHexadecimal(itemToConvert){
 
 }
 
+/*Converts Hexadecimal to Binary*/
 function hexadecimalToDecimal(itemToConvert){
 
+    //If the user inputs lowercase letters for the hexadecimal then it converts to uppercase so that the code can check it
     itemToConvert = itemToConvert.toUpperCase();
 
+    //Checks if input is not a proper Hexadecimal sequence
     if(!isHexa(itemToConvert)){
 
         alert("Input is not a valid hexadecimal value!");
@@ -379,8 +389,10 @@ function hexadecimalToDecimal(itemToConvert){
 
 }
 
+/*Converts Octal to Decimal*/
 function octalToDecimal(itemToConvert){
 
+    //Checks if input is not a proper Octal sequence
     if(!isOctal(itemToConvert)){
 
         alert("Input is not a valid Octal Number!");
@@ -405,10 +417,12 @@ function octalToDecimal(itemToConvert){
 
 }
 
+/*Converts Decimal to Binary*/
 function decimalToBinary(itemToConvert){
 
     itemToConvert = itemToConvert.replaceAll(',', '');
 
+    //Checks if input is not a number
     if(isNaN(itemToConvert)){
 
         alert("Input is not a valid Decimal Number!");
